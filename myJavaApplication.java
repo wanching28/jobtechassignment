@@ -20,7 +20,7 @@ User fetchUserInfoById (int user_id) {
     }
 }
 
-public class MyApplication {
+public class MyJavaApplication {
     
     public static void main(String[] args)
     {
