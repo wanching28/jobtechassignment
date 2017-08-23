@@ -2,33 +2,31 @@
 <html>
 <body>
 
-<p id="htmlPage"></p>
+<p id="htmlpage"></p>
 
 <script type="text/javascript">
 
 //load html file
-document.getElementById("htmlPage").innerHTML='<object type="text/html" data="1_page10_7-26-2017_170078010_1.html"></object>';
-//$('#htmlPage').load('1_page10_7-26-2017_170078010_1.html');
-//extract all the meaningful information from the html file
-var reqno = document.getElementsByClassName("req");
+document.getElementById("htmlpage").innerHTML='<object type="text/html" data="1_page10_7-26-2017_170078010_1.html"></object>';
+//$('#htmlpage').load('1_page10_7-26-2017_170078010_1.html');
 
-var jobtitletest = document.querySelector('[itemprop=title]').textContent;
-var jobtitle = document.getElementsByAttribute('itemprop', 'title');
-var location = document.getElementsByAttribute('itemprop', 'addressLocality')+ ", " +
-	       document.getElementsByAttribute('itemprop', 'addressRegion')+ ", " +
-	       document.getElementsByAttribute('itemprop', 'addressCountry');
-var reqno = document.getElementsByClassName("req");
-var jocategory = document.getElementsByAttribute('itemprop', 'occupationalCategory');
+//extract all the meaningful information from the html file
+var jobTitle = document.querySelector('[itemprop=title]').textContent;
+var location =  document.querySelector('[itemprop=addressLocality]').textContent+ ", " +
+	       document.querySelector('[itemprop=addressRegion]').textContent+ ", " +
+	       document.querySelector('[itemprop=addressCountry]').textContent+ ", " +
+var reqNo = document.getElementsByClassName("req");
+var jobCategory =document.querySelector('[itemprop=occupationalCategory]').textContent
 var salary = document.getElementsByClassName("referral-info");
-var jobdescription = document.getElementsByClassName("desc");
+var jobDescription = document.getElementsByClassName("desc");
 
 //append all the extracted data in a text variable
- var text = "Job Title: "+jobtitle +"\n"+
+ var text = "Job Title: "+jobTitle +"\n"+
 		location +"\n"+
-		reqno+"\n"+ 
-		jobcategory+"\n"+ 	
+		reqNo+"\n"+ 
+		jobCategory+"\n"+ 	
 		salary+"\n"+ 
-		"Job Description: "+jobdescription
+		"Job Description: "+jobDescription
 
 //Create new blob to store the raw text data
  var file = new Blob([text], {type : "text/plain"});
