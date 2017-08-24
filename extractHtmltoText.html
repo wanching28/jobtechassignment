@@ -3,12 +3,12 @@
 <body>
 
 <p id="htmlpage"></p>
-
-<script>
-
+	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
 //load html file
-document.getElementById("htmlpage").innerHTML='<object type="text/html" data="1_page10_7-26-2017_170078010_1.html"></object>';
-//$('#htmlpage').load('1_page10_7-26-2017_170078010_1.html');
+$("#htmlpage").load("1_page10_7-26-2017_170078010_1.html",function(){
+// document.getElementById("htmlpage").innerHTML='<object type="text/html" data="1_page10_7-26-2017_170078010_1.html"></object>';
 
 //extract all the meaningful information from the html file
 var jobTitle = document.querySelector('[itemprop=title]').firstChild.innerHTML;
@@ -42,7 +42,7 @@ for (var i = 0; i < jobDescriptionElements.length; i++) {
        jobDescription += jobDescriptionElements[i].innerHTML;
 }
 //append all the extracted data in a text variable
- var text = "Job Title: " + jobTitle + "\n" +
+var text = "Job Title: " + jobTitle + "\n" +
 	    "Location: " + location + "\n" +
 	     reqNo + "\n" + 
 	     "Job Category: " + jobCategory + "\n"+ 	
@@ -50,12 +50,14 @@ for (var i = 0; i < jobDescriptionElements.length; i++) {
 	     "Job Description: " + jobDescription;
 
 //create new blob to store the raw text data
- var file = new Blob([text], {type : "text/plain"});
+var file = new Blob([text], {type : "text/plain"});
 
 //export to a file
 //create a new object URL for the text file and download it as 'result.txt' file
  a.href = URL.createObjectURL(file);
  a.download = 'result.txt';
+});
+	
 
 </script>
 
