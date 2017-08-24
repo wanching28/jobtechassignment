@@ -17,7 +17,7 @@ var location =  document.querySelector('[itemprop=addressLocality]').firstChild.
 	        document.querySelector('[itemprop=addressRegion]').firstChild.nodeValue + ", " +
 	        document.querySelector('[itemprop=addressCountry]').firstChild.nodeValue;
 /*returns first element in the document with the itemprop attribute of "addressLocality",
-"addressRegion" and addressCountry*/
+"addressRegion" and "addressCountry"*/
 var reqNoElements = document.querySelectorAll("div.req"); 
 //returns a list of all div elements within the document with the class "req"
 var reqNo; 
@@ -50,7 +50,7 @@ for (var i = 0; i < jobDescriptionElements.length; i++) {
 	     "Salary: " + salary + "\n" + 
 	     "Job Description: " + jobDescription;
 
-//Create new blob to store the raw text data
+//create new blob to store the raw text data
  var file = new Blob([text], {type : "text/plain"});
 
 //export to a file
