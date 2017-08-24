@@ -4,29 +4,51 @@
 
 <p id="htmlpage"></p>
 
-<script type="text/javascript">
+<script>
 
 //load html file
 document.getElementById("htmlpage").innerHTML='<object type="text/html" data="1_page10_7-26-2017_170078010_1.html"></object>';
 //$('#htmlpage').load('1_page10_7-26-2017_170078010_1.html');
 
 //extract all the meaningful information from the html file
-var jobTitle = document.querySelector('[itemprop=title]').textContent;
-var location =  document.querySelector('[itemprop=addressLocality]').textContent+ ", " +
-	       document.querySelector('[itemprop=addressRegion]').textContent+ ", " +
-	       document.querySelector('[itemprop=addressCountry]').textContent+ ", " +
-var reqNo = document.getElementsByClassName("req");
-var jobCategory =document.querySelector('[itemprop=occupationalCategory]').textContent
-var salary = document.getElementsByClassName("referral-info");
-var jobDescription = document.getElementsByClassName("desc");
-
+var jobTitle = document.querySelector('[itemprop=title]').firstChild.nodeValue;
+//returns node value of the first element in the document with the itemprop attribute of "title"
+var location =  document.querySelector('[itemprop=addressLocality]').firstChild.nodeValue + ", " +
+	        document.querySelector('[itemprop=addressRegion]').firstChild.nodeValue + ", " +
+	        document.querySelector('[itemprop=addressCountry]').firstChild.nodeValue;
+/*returns first element in the document with the itemprop attribute of "addressLocality",
+"addressRegion" and addressCountry*/
+var reqNoElements = document.querySelectorAll("div.req"); 
+//returns a list of all div elements within the document with the class "req"
+var reqNo; 
+if(reqNoElements.length > 0){
+      reqNo = reqNoElements[0].textContent + reqNoElements[1].textContent ;
+}
+var jobCategoryElements = document.querySelectorAll('[itemprop=occupationalCategory]'); 
+//returns a list of all div elements within the document with the class "occupationalCategory"
+var jobCategory; 
+if(jobCategoryElements.length > 0){
+      jobCategory = jobCategoryElements[0].textContent + jobCategoryElements[1].textContent ;
+}
+let salaryElements =  document.querySelectorAll(".referral-info"); 
+//returns a list of all div elements within the document with the class "referral-info"
+var salary;
+if(salaryElements.length > 0){
+	salary = salaryElements[1]; //returns the salary element in index 1
+}
+var jobDescriptionElements = document.getElementsByClassName("desc"); //returns all elements that with the class of "desc"
+var jobDescription;
+for (var i = 0; i < jobDescriptionElements.length; i++) {
+       jobDescription += jobDescriptionElements[i].textContent;
+}
+	
 //append all the extracted data in a text variable
- var text = "Job Title: "+jobTitle +"\n"+
-		location +"\n"+
-		reqNo+"\n"+ 
-		jobCategory+"\n"+ 	
-		salary+"\n"+ 
-		"Job Description: "+jobDescription
+ var text = "Job Title: " + jobTitle + "\n" +
+	    "Location: " + location + "\n" +
+	     reqNo + "\n" + 
+	     "Job Category: " + jobCategory + "\n"+ 	
+	     "Salary: " + salary + "\n" + 
+	     "Job Description: " + jobDescription;
 
 //Create new blob to store the raw text data
  var file = new Blob([text], {type : "text/plain"});
